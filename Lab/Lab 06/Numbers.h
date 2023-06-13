@@ -24,7 +24,7 @@ class Numbers
 
 
 
-		string print();
+		void print() const;
 
 };
 
