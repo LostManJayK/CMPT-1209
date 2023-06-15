@@ -115,7 +115,7 @@ void Student::input()
     getline(cin, this->firstName);
 
     cout << "Last Name: ";
-    cin >> this->lastName;
+    getline(cin, this->lastName);
 
     cout << "Student ID: ";
     cin >> this->studentID;
@@ -125,6 +125,8 @@ void Student::input()
 
     cout << "GPA: ";
     cin >> this->gpa;
+
+    cin.ignore();
 }
 
 int Student::firstWidth = 15;
@@ -136,10 +138,10 @@ int Student::gpaWidth = 5;
 
 void Student::output() const
 {
-    cout << left << "  " << setw(Student::firstWidth) << this->firstName << right << '|';
-    cout << left << "  " <<  setw(Student::lastWidth) << this->lastName << right << '|';
-    cout << left << "  " <<  setw(Student::idWidth) << this->studentID << right << '|';
-    cout << left << "  " <<  setw(Student::phoneWidth) << this->phoneNumber << right << '|';
-    cout << left << "  " <<  setw(Student::gpaWidth) << this->gpa << endl;
+    cout << left << setw(Student::firstWidth) << this->firstName;
+    cout << left << setw(Student::lastWidth) << this->lastName;
+    cout << left << setw(Student::idWidth) << this->studentID;
+    cout << left << setw(Student::phoneWidth) << this->phoneNumber;
+    cout << left << setw(Student::gpaWidth) << this->gpa << endl;
 }
 
