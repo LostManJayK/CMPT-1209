@@ -5,10 +5,7 @@
 
 #include "Student.h"
 
-using std::cout;
-using std::cin;
-using std::getline;
-using std::string;
+using namespace std;
 
 class Course
 {
@@ -56,10 +53,6 @@ class Course
         void displayByID(string&) const;
         void displayByPhone(string&) const;
         
-
-
-
-
 };
 
 #endif
