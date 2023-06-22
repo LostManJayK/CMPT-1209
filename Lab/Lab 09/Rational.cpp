@@ -1,124 +1,83 @@
-#include <iostream>
-#include <string>
-#include <cmath>
-
 #include "Rational.h"
+#include <iostream>
 
 using namespace std;
 
-Rational::Rational()
-{
-	this->numerator = 0;
-	this->denominator = 1;
-
-}
-
-Rational::Rational(int num, int denom)
-{
-	this->numerator = num;
-	this->denominator = denom;
-	this->reduce();
-}
-
-Rational::~Rational()
-{
-	cout << "Rational deleted" << endl;
-}
-
-void Rational::input()
-{
-	cout << "Enter the numerator: ";
-
-	cin >> this->numerator;
-
-	cout << "Enter the denominator: ";
-
-	do
-	{
-		cin >> this->denominator;
-		if (this->denominator == 0)
-		{
-			cout << "Denominator must not be zero, enter a non-zero value: ";
-		}
-	} while (this->denominator == 0);
-	
-}
-
-
 void Rational::reduce()
 {
-	int min=1, max=1, sign1 =1, sign2=1;
-	int gcf=1;
-
-	sign1 = (this->numerator < 0) ? -1 : 1;
-	sign2 = (this->denominator < 0) ? -1 : 1;
-
-	int sign = sign1 * sign2;
-
-	if (abs(this->numerator) < abs(this->denominator))
-	{
-		min = abs(this->numerator);
-		max = abs(this->denominator);
-	}
-	else
-	{
-		max = abs(this->numerator);
-		min = abs(this->denominator);
-	}
-
-	if (max % min == 0)
-	{
-		gcf = min;
-	}
-	else
-	{
-		for (int i = 2; i <= min / 2; i++)
-		{
-			if((min % i == 0) && (max % i == 0))
-			{
-				gcf = i;
-			}
-		}
-	}
-
-	this->numerator = abs(this->numerator) / (gcf * sign);
-	this->denominator = abs(this->denominator / gcf);
-
+    int x = abs(numer);
+    int y = abs(denom);
+    // find minimum of x and y
+    int min = x;
+    if (y < x)
+        min = y;
+    // finding a common factor greater than 1
+    int gcf = 1;
+    for (int i = 2; i <= min; i++) {
+        if (x % i == 0 && y % i == 0) {
+            gcf = i;
+        }
+    }
+    numer = numer / gcf;
+    denom = denom / gcf;
+    if (denom < 0)
+    {
+        numer = -numer;
+        denom = -denom;
+    }
 }
-
-
-
-//Mutators
-void Rational::setNumerator(int num)
+Rational::Rational()
 {
-	this->numerator = num;
+    numer = 0;
+    denom = 1;
 }
-
-void Rational::setDenominator(int denom)
+Rational::Rational(int x, int y)
 {
-	this->denominator = denom;
-
-	do
-	{
-		if (this->denominator == 0)
-		{
-			cout << "Denominator must not be zero, enter a non-zero value: ";
-			cin >> this->denominator;
-		}
-	} while (this->denominator == 0);
+    numer = x;
+    if (y != 0)
+        denom = y;
+    else
+        denom = 1;
+    reduce();
 }
-
-//Accessors
-int Rational::getNumerator()
+int Rational::getNumer() const
 {
-	return this->numerator;
+    return numer;
 }
-int Rational::getDenominator()
+int Rational::getDenom() const
 {
-	return this->denominator;
+    return denom;
 }
-
-void Rational::getRatio()
+void Rational::setNumer(int x)
 {
-	cout << this->numerator << "/" << denominator << endl;
+    numer = x;
+    reduce();
+}
+void Rational::setDenom(int x)
+{
+    denom = x;
+    if (denom == 0)
+        denom = 1;
+    reduce();
+}
+void Rational::input()
+{
+    cout << "Numerator? ";
+    cin >> numer;
+    cout << "Denominator? ";
+    cin >> denom;
+    while (denom == 0)
+    {
+        cout << "Denominator can't be zero!\n";
+        cout << "Denominator? ";
+        cin >> denom;
+    }
+    reduce();
+}
+void Rational::output() const
+{
+    if (denom != 1)
+        cout << numer << "/" << denom << endl;
+    else
+        cout << numer << endl;
 }
