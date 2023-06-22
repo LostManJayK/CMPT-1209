@@ -1,35 +1,17 @@
-#ifndef RATIONAL_H
-#define RATIONAL_H
-
-using namespace std;
-
+#pragma once
 class Rational
 {
-	private:
-		int numerator;
-		int denominator;
-	public:
-		//Constructors
-		Rational();
-		Rational(int, int denom = 1);
-
-		//Deconstructor
-		~Rational();
-
-		//IO & Validation
-		void input();
-		void reduce();
-
-		//Mutators
-		void setNumerator(int);
-		void setDenominator(int);
-
-		//Accessors
-		int getNumerator();
-		int getDenominator();
-		void getRatio();
-
-
+private:
+    int numer;
+    int denom;
+public:
+    int getNumer() const;
+    int getDenom() const;
+    void setNumer(int);
+    void setDenom(int);
+    void input();
+    void output() const;
+    Rational();
+    Rational(int, int = 1);
+    void reduce();
 };
-
-#endif
